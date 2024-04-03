@@ -1,0 +1,85 @@
+{
+    "language": "Solidity",
+    "sources": {
+        "test.sol": {
+            "keccak256": "0x123...",
+            "urls": [
+                "bzzr://56ab...",
+                "ipfs://Qma...",
+                "/tmp/path/to/file.sol"
+            ]
+        },
+        "destructible": {
+            "keccak256": "0x234...",
+            "content": "contract destructible is owned { function shutdown() { if (msg.sender == owner) selfdestruct(owner); } }"
+        }
+    },
+    "settings": {
+        "optimizer": {
+            "enabled": true,
+            "runs": 200,
+            "details": {
+                "peephole": true,
+                "inliner": true,
+                "jumpdestRemover": true,
+                "orderLiterals": false,
+                "deduplicate": false,
+                "cse": false,
+                "constantOptimizer": false
+            }
+        },
+        "evmVersion": "london",
+        "viaIR": true,
+        "debug": {
+            "revertStrings": "default"
+        },
+        "metadata": {
+            "useLiteralContent": true,
+            "bytecodeHash": "ipfs"
+        },
+        "libraries": {
+            "contract.sol": {
+                "MyLib": "0x0000000000000000000000000000000000000000"
+            }
+        },
+        "outputSelection": {
+            "*": {
+                "*": [
+                    "metadata",
+                    "evm.bytecode",
+                    "evm.bytecode.sourceMap"
+                ],
+                "": [
+                    "ast"
+                ]
+            },
+            "def": {
+                "MyContract": [
+                    "abi",
+                    "evm.bytecode.opcodes"
+                ]
+            }
+        },
+        "modelChecker": {
+            "contracts": {
+                "test.sol": [
+                    "Overflow"
+                ]
+            },
+            "engine": "all",
+            "showUnproved": true,
+            "solvers": [
+                "all",
+                "cvc4",
+                "smtlib2",
+                "z3"
+            ],
+            "targets": [
+                "underflow",
+                "overflow",
+                "assert"
+            ],
+            "timeout": 20000
+        }
+    }
+}

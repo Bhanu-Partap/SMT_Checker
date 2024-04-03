@@ -10,7 +10,7 @@ module.exports = {
         "contracts/test.sol": ["Monotonic"]        
       },    
       divModNoSlacks: true,      
-      engine: "all",      
+      engine: "chc",      
       invariants: ["contract", "reentrancy"],
       showUnproved: true,      
       solvers: ["smtlib2"],
